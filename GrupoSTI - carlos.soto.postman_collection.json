@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "d4cf8c59-ca6d-45d0-8890-637a21dca930",
+		"name": "GrupoSTI - carlos.soto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "119398"
+	},
+	"item": [
+		{
+			"name": "characters local",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://loclahost:8080/characters",
+					"protocol": "http",
+					"host": [
+						"loclahost"
+					],
+					"port": "8080",
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

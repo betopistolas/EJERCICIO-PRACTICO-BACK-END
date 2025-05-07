@@ -1,0 +1,9 @@
+
+a
+java:S2259#"FA "NullPointerException" could be thrown; "getBody()" can return null.(אףüי‏ÿÿÿÿ
+Q
+java:S1854"6Remove this useless assignment to local variable "ts".(חױֹ‰ÿÿÿÿÿ
+B
+java:S1481"'Remove this unused "ts" local variable.(חױֹ‰ÿÿÿÿÿ
+K
+java:S1068"0Remove this unused "objectMapper" private field.(­ד׀וüÿÿÿÿ
