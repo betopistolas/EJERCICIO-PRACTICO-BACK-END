@@ -7,7 +7,29 @@
 	},
 	"item": [
 		{
-			"name": "characters local",
+			"name": "All characters local",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://loclahost:8080/characters",
+					"protocol": "http",
+					"host": [
+						"loclahost"
+					],
+					"port": "8080",
+					"path": [
+						"characters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Characters For Id local",
 			"request": {
 				"auth": {
 					"type": "noauth"

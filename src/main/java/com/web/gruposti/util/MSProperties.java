@@ -1,9 +1,11 @@
 package com.web.gruposti.util;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
+@Data
 public class MSProperties {
 
     @Value("${public_key}")
@@ -21,24 +23,4 @@ public class MSProperties {
     @Value("${api_characters}")
     private String apiCharacters;
 
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public String getPrivateKey() {
-        return privateKey;
-    }
-
-    public String getApiCharacters() {
-        return apiCharacters;
-    }
-
-    public String getTs() {
-        return ts;
-    }
-
-    public String getHash() {
-        return hash;
-    }
 }
