@@ -7,6 +7,80 @@
 	},
 	"item": [
 		{
+			"name": "servidor privado",
+			"item": [
+				{
+					"name": "oracle - All characters",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://loclahost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"loclahost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "oracle - limit characters",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://139.177.103.123:8080/characters",
+							"protocol": "http",
+							"host": [
+								"139",
+								"177",
+								"103",
+								"123"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "oracle - Characters For Id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://loclahost:8080/characters",
+							"protocol": "http",
+							"host": [
+								"loclahost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "All characters local",
 			"request": {
 				"auth": {
