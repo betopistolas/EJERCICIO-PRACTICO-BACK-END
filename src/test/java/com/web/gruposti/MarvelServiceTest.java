@@ -69,7 +69,7 @@ class MarvelServiceTest {
                 .thenReturn(new ResponseEntity<>(mockResponse, HttpStatus.OK));
 
         // 4. Ejecutar y validar
-        var result = marvelService.getCharacters();
+        var result = marvelService.getCharacters(5);
 
         assertEquals(1, result.size());
         assertEquals("Spider-Man", result.get(0).getName());

@@ -34,7 +34,7 @@ class MarvelControllerTest {
         character.setDescription("Genius billionaire");
         character.setImage("http://example.com/ironman.jpg");
 
-        when(marvelService.getCharacters()).thenReturn(List.of(character));
+        when(marvelService.getCharacters(4)).thenReturn(List.of(character));
 
         mockMvc.perform(get("/api/characters"))
                 .andExpect(status().isOk())

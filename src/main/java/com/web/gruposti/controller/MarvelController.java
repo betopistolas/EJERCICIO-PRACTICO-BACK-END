@@ -12,10 +12,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -29,30 +27,37 @@ public class MarvelController {
     private MarvelService marvelService;
 
     @Operation(
-            summary = "Obtener personajes de Marvel",
-            description = "Retorna una lista de hasta 25 personajes desde la API de Marvel",
+            summary = "Listar personajes de Marvel",
+            description = "Obtiene una lista de personajes desde la API de Marvel con un límite configurable (entre 1 y 100)",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Personajes obtenidos correctamente"),
-                    @ApiResponse(responseCode = "500", description = "Error al conectarse con la API de Marvel")
+                    @ApiResponse(responseCode = "400", description = "Límite inválido")
             }
     )
     @GetMapping
-    public ResponseEntity getCharacters() {
+    public ResponseEntity getCharacters(@Parameter(description = "Número máximo de personajes a retornar (1-100)", example = "25")
+                                            @RequestParam(defaultValue = "20") int limit) {
         try {
 
-            List<MarvelCharacter> characterList = marvelService.getCharacters();
+            if (limit < 1 || limit > 100) {
+                ErrorResponse error = new ErrorResponse(
+                        "INVALID_LIMIT", "Provided value for limit param is invalid."
+                );
+                return ResponseEntity.badRequest().body(error);
+            }
+            List<MarvelCharacter> characters = marvelService.getCharacters(limit);
+            CharacterResponse.Data data = new CharacterResponse.Data();
+            data.setItems(characters.size());
+            data.setCharacters(characters);
+
             CharacterResponse response = new CharacterResponse();
             response.setType("SUCCESS");
             response.setAction("CONTINUE");
-
-            CharacterResponse.Data data = new CharacterResponse.Data();
-            data.setItems(characterList.size());
-            data.setCharacters(characterList);
             response.setData(data);
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, e.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.toString(), e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
         }
     }
@@ -70,13 +75,6 @@ public class MarvelController {
     @GetMapping("/{id}")
     public ResponseEntity getCharacterDetail(
             @Parameter(description = "ID del personaje a consultar", example = "1011334") @PathVariable int id) {
-
-        try{
-            return ResponseEntity.ok(marvelService.getCharacterDetail(id));
-        } catch (Exception e){
-            ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND, e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
-
+        return ResponseEntity.ok(marvelService.getCharacterDetail(id));
     }
 }
